@@ -31,7 +31,7 @@ export const Login = () => {
       dispatch({ type: "LOGINSUCC", payload: res.data });
       
       
-      navigate("/");
+      navigate("/"); // navigate to home
 
       toast.success("Login successful!", {
         position: "top-center",
