@@ -29,13 +29,13 @@ export const Login = () => {
       });
 
       dispatch({ type: "LOGINSUCC", payload: res.data });
+      
+      
+      navigate("/");
 
       toast.success("Login successful!", {
         position: "top-center",
         autoClose: 2000,
-        onClose: () => {
-          navigate("/");
-        },
       });
     } catch (err) {
       dispatch({ type: "LOGINFAILED" });
@@ -102,7 +102,7 @@ export const Login = () => {
             </p>
           </form>
         </div>
-        {/* <ToastContainer /> */}
+        <ToastContainer />
       </section>
     </>
   );
