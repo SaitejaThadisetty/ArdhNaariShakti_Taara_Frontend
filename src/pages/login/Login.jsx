@@ -4,7 +4,7 @@ import back from "../../assets/images/my-account.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -99,7 +99,7 @@ export const Login = () => {
             </button>
 
             <p className="register-link">
-              Don’t have an account? <Link to="/register">Register</Link>
+              Don't have an account? <Link to="/register">Register</Link>
             </p>
           </form>
         </div>
