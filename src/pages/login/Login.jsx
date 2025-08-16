@@ -30,13 +30,14 @@ export const Login = () => {
 
       dispatch({ type: "LOGINSUCC", payload: res.data });
       
-      
-      navigate("/"); // navigate to home
-
+      // Show toast for feedback
       toast.success("Login successful!", {
         position: "top-center",
-        autoClose: 2000,
+        autoClose: 1500
       });
+      
+      // Navigate immediately to ensure it works on all computers
+      navigate("/");
     } catch (err) {
       dispatch({ type: "LOGINFAILED" });
       setError("Login failed. Please check your username and password.");
@@ -102,7 +103,6 @@ export const Login = () => {
             </p>
           </form>
         </div>
-        <ToastContainer />
       </section>
     </>
   );
