@@ -3,6 +3,8 @@ import { Legal } from "./pages/legal/legal.jsx"
 import { Footer } from "./components/footer/Footer";
 import { GoogleTagManager } from "./components/tagmanager/tagmanager";
 import { Header } from "./components/header/Header";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Home } from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
 import { Regsiter } from "./pages/login/Regsiter";
@@ -34,6 +36,7 @@ const App = () => {
       <Router>
         <Header />
         <GoogleTagManager />
+        <ToastContainer />
         <Routes>          
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
