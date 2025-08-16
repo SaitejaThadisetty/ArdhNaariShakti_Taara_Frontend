@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom'; 
 
 export const AboutContainer = styled.div`
-   height:500px;
+  //  height:500px;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -11,14 +11,12 @@ align-items: center;
 z-index: 3;
 
 @media screen and (max-width:768px){
-    height:1100px;
-    margin-top: 50%;
-    margin-bottom: 50%;
+    margin-top: 40px; 
+    margin-bottom: 40px;
 }
 @media screen and (max-width:480px){
-    height:750px;
-    margin-top: 50%;
-    margin-bottom: 50%;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 `
 
@@ -92,7 +90,7 @@ export const AboutWrapper = styled.div`
 
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr;
-    margin-top:300px;
+    // margin-top:300px;
   }
 `;
 

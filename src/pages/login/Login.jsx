@@ -92,6 +92,10 @@ export const Login = () => {
               </div>
             </div>
 
+            <p className="forgot-password-link">
+              <Link to="/forgot-password">Forgot Password?</Link>
+            </p>
+
             {error && <p className="error-message">{error}</p>}
 
             <button className="button" type="submit" disabled={FetchData}>
@@ -103,6 +107,8 @@ export const Login = () => {
             </p>
           </form>
         </div>
+        {/* <ToastContainer /> */}
+        <ToastContainer />
       </section>
     </>
   );

@@ -25,11 +25,17 @@ export const nav = [
       url: "/jobs",
     },
     {
-      id: 6,
+      id:6,
+      text:"Legal",
+      url:"/legal"
+    },
+    {
+      id: 7,
       text: "Gallery",
       url: "/gallery",
     },
-    {id:7,
+    {
+      id:8,
       text:"Calming Corner",
       url:"/music",
     },

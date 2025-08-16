@@ -1,13 +1,14 @@
 import React from "react";
 import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
-import "../contact/contact.css"; // Optional: if you want to style separately
-
+import "../contact/contact.css";
 
 export const Contact = () => {
   return (
     <div className="contact-page">
-      <h1>Contact Us</h1>
-      <p>We would love to hear from you!</p>
+      <div className="contact-header">
+        <h1>Contact Us</h1>
+        <p>We would love to hear from you!</p>
+      </div>
 
       {/* Contact Info */}
       <div className="contact-info">
@@ -26,12 +27,13 @@ export const Contact = () => {
       </div>
 
       {/* Contact Form */}
-      <form className="contact-form">
+      <div className="contact-form">
+        <h2>Send us a Message</h2>
         <input type="text" placeholder="Your Name" required />
         <input type="email" placeholder="Your Email" required />
-        <textarea placeholder="Your Message" required />
-        <button type="submit">Send</button>
-      </form>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </div>
     </div>
   );
 };

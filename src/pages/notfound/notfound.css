@@ -1,0 +1,162 @@
+:root {
+  --color-bg1: rgb(255, 145, 145);
+  --color-bg2: rgb(121, 148, 255);
+  --color1: 18, 113, 255;
+  --color2: 221, 74, 255;
+  --color3: 255, 204, 112;
+  --color4: 100, 220, 255;
+  --color5: 255, 82, 82;
+  --color-interactive: 140, 100, 255;
+  --circle-size: 80%;
+  --blending: hard-light;
+}
+
+body {
+  margin: 0;
+}
+
+.notfound-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--color-bg1), var(--color-bg2));
+  position: relative;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Animated gradient glow */
+.notfound-glow {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(
+    circle at center,
+    rgba(var(--color3), 0.4),
+    transparent 70%
+  );
+  animation: pulse 6s ease-in-out infinite;
+  mix-blend-mode: var(--blending);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* Floating circles */
+.notfound-container::before,
+.notfound-container::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  background: radial-gradient(circle, rgba(var(--color1), 0.4), transparent 70%);
+  mix-blend-mode: var(--blending);
+  animation: float 10s infinite ease-in-out alternate;
+}
+
+.notfound-container::after {
+  background: radial-gradient(circle, rgba(var(--color5), 0.4), transparent 70%);
+  animation-duration: 12s;
+}
+
+@keyframes float {
+  from {
+    transform: translate(-20%, -20%);
+  }
+  to {
+    transform: translate(20%, 20%);
+  }
+}
+
+/* Content Styling */
+.notfound-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  padding: 20px;
+}
+
+.notfound-content h1 {
+  font-size: 8rem;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 5px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.notfound-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.notfound-content p {
+  font-size: 1.2rem;
+  margin: 10px 0 30px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+/* Button */
+.home-btn {
+  display: inline-block;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, rgb(var(--color1)), rgb(var(--color2)));
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 8px 20px rgba(var(--color2), 0.5),
+              inset 0 -3px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shiny light effect */
+.home-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75px;
+  width: 50px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: skewX(-20deg);
+  animation: shine 2s infinite;
+}
+
+/* Hover pop + glow */
+.home-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 12px 25px rgba(var(--color2), 0.7),
+              inset 0 -4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Shine animation */
+@keyframes shine {
+  0% {
+    left: -75px;
+  }
+  50% {
+    left: 120%;
+  }
+  100% {
+    left: 120%;
+  }
+}

@@ -1,50 +1,77 @@
 .accountInfo {
   margin: 80px 0;
 }
+
 .accountInfo .container {
   padding: 50px;
   max-width: 60%;
   margin: auto;
 }
+
 .accountInfo .content {
   margin-top: 80px;
   display: flex;
   justify-content: flex-start;
   position: relative;
 }
+
 .accountInfo .left {
   width: 150px;
   position: relative;
 }
+
 .accountInfo .right {
   width: calc(100% - 180px);
   margin-left: 50px;
 }
 
+
 .accountInfo .left .img input {
   width: 150px;
   height: 150px;
-  position: relative;
-  z-index: 2;
-  opacity: 0;
-}
-.accountInfo .icon,
-.accountInfo .img img {
   position: absolute;
   top: 0;
   left: 0;
-  width: 150px;
-  height: 150px;
-  z-index: 1;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.accountInfo .img {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.accountInfo .img img {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  display: block;
 }
+
+
+.accountInfo .icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+
 .accountInfo .right label {
   font-size: 17px;
   color: #000;
   margin-bottom: 10px;
   display: block;
 }
+
 .profile h4 {
   text-transform: capitalize;
   color: #000;
