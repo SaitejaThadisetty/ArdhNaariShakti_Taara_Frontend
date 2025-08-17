@@ -286,8 +286,24 @@
     padding: 5px 8px;
     font-size: 10px;
   }
+
+  /* --- Added for search filter responsiveness --- */
+  .search-filter-bar {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+    padding: 0 10px;
+  }
+
+  .filter-dropdown,
+  .search-input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 1rem;
+  }
 }
 
+/* Search bar base styles */
 .search-filter-bar {
   display: flex;
   gap: 10px;
