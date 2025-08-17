@@ -172,3 +172,38 @@
   background-color: #471886;
 }
 
+.search-filter-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 30px;
+  padding: 0 10px;
+}
+
+.search-filter-container input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 1px solid #dfe6e9;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-filter-container input:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 5px #6c5ce7aa;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 480px) {
+  .search-filter-container {
+    padding: 0 20px;
+    margin: 15px 0 25px;
+  }
+  .search-filter-container input {
+    max-width: 100%;  /* take full width on small screens */
+    font-size: 16px;  /* slightly bigger font for easier reading */
+    padding: 12px 18px; /* bigger tap area */
+  }
+}

@@ -287,3 +287,23 @@
     font-size: 10px;
   }
 }
+
+.search-filter-bar {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.filter-dropdown,
+.search-input {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-input::placeholder {
+  color: #333;
+  opacity: 1;
+}
