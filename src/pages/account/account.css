@@ -77,3 +77,42 @@
   color: #000;
   font-weight: 500;
 }
+
+@media only screen and (max-width: 768px) {
+  .accountInfo .container {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .accountInfo .content {
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: center; /* Center items for mobile */
+  }
+
+  .accountInfo .left {
+    width: 100%; /* Take full width */
+    display: flex; /* Use flex to center the image */
+    justify-content: center;
+    margin-bottom: 20px; /* Add some space below the image */
+  }
+
+  .accountInfo .right {
+    width: 100%; /* Take full width */
+    margin-left: 0;
+    text-align: center; /* Center text for mobile */
+  }
+
+  .accountInfo .right label {
+    text-align: left; /* Keep labels left-aligned */
+  }
+
+  .accountInfo .right input {
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+  }
+
+  .accountInfo .right .button {
+    width: 100%;
+  }
+}
