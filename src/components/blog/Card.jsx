@@ -35,6 +35,8 @@ export const Card = ({ posts }) => {
 
       {/* Search Input */}
       <div className="search-filter-container">
+      <div className="search-filter-wrapper">
+        <AiOutlineTags className="search-icon" />
         <input
           type="text"
           placeholder="Search blogs by title, author, or keywords..."
@@ -42,6 +44,7 @@ export const Card = ({ posts }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
+    </div>
 
       {/* Blog Posts */}
       <section className="blog">

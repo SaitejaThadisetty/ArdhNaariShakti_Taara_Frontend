@@ -125,6 +125,59 @@ export const Shelter = () => {
       mapLink:
         "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=15.4909309%2C73.8278499&z=14",
     },
+    {
+      id: 9,
+      shelterName: "Gokhale Road Bandhan",
+      address: "773 Purbalok Kalikapur Mukundapur, Kolkata",
+      contactPerson: "Ranjita Sinha (Project Director)",
+      phone: "9830027185",
+      email: "garimagreh.astana@yahoo.com",
+      state: "West Bengal",
+      district: "Kolkata",
+      city: "Kolkata",
+      pincode: "700099",
+      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=22.5009134%2C88.39493449999998&z=8"
+    },
+    {
+      id: 10,
+      shelterName: "Kolkata Rista",
+      address: "95/D77 Basundhara Chingrighata, Canal South Road, Lakshmimina Bhaban, Kolkata, West Bengal",
+      contactPerson: "Dr. Santosh Kr. Giri (Project Director)",
+      phone: "9339219696",
+      email: "ristashelterhome@gmail.com",
+      state: "West Bengal",
+      district: "Kolkata",
+      city: "Kolkata",
+      pincode: "700105",
+      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=22.557509900000003%2C88.40955129999998&z=8"
+    },
+    {
+      id: 11,
+      shelterName: "Lakshya Trust",
+      address: "302/303/304, Shilalekh Complex, Opp. To Ford Showroom, Munjmahuda, Vadodara, Gujarat – 390020",
+      contactPerson: "Mr. Sylvester Merchant (Project Director)",
+      phone: "9825311997",
+      email: "lakshyagarimagreh@gmail.com",
+      state: "Gujarat",
+      district: "Vadodara",
+      city: "Vadodara",
+      pincode: "390020",
+      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=22.28683749999999%2C73.1672918&z=8"
+    },
+    {
+      id: 12,
+      shelterName: "Nai Bhor Sansta",
+      address: "46, Marudhar Vihar, Khatipura Road, Jhotwara, Jaipur",
+      contactPerson: "Pushpa Maai (Project Director)",
+      phone: "9829291377",
+      email: "naibhor.sanstha@gmail.com",
+      state: "Rajasthan",
+      district: "Jaipur",
+      city: "Jaipur",
+      pincode: "", // Pincode not provided in the HTML snippet
+      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=26.92346419999998%2C75.7478494&z=8"
+    }
+
   ];
 
   // Filter shelterData based on searchTerm and filterBy field
@@ -158,13 +211,17 @@ export const Shelter = () => {
           <option value="contactPerson">Contact Person</option>
         </select>
 
-        <input
-          type="text"
-          placeholder={`Search by ${filterBy}`}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
+        {/* Search Input with Icon */}
+        <div className="search-input-wrapper">
+          <span className="search-icon">🔍</span>
+          <input
+            type="text"
+            placeholder={`Search by ${filterBy}`}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+        </div>
       </div>
 
       <div className="table-container">
