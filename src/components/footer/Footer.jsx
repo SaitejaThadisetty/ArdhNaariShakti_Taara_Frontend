@@ -42,14 +42,14 @@ export const Footer = () => {
               Join us in creating a brighter future for all.
             </p>
             <div className="social-links">
-              <a href="https://www.instagram.com/agarwal.vidu?igsh=MWI4d3Jvb2locmVvcQ==" className="social-link" aria-label="Instagram">
+              <a href="https://www.instagram.com/agarwal.vidu?igsh=MWI4d3Jvb2locmVvcQ==" className="social-link" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                 <RiInstagramFill />
               </a>
-              <a href="https://x.com/Vidushit143?t=QhDahpmDpE9ZuLXw0MujSA&s=08" className="social-link" aria-label="Twitter">
+              <a href="https://x.com/Vidushit143?t=QhDahpmDpE9ZuLXw0MujSA&s=08" className="social-link" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
                 <AiFillTwitterCircle />
               </a>
               <a href="https://www.linkedin.com/in/vidushi-agarwal-8958-developer?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
-" className="social-link" aria-label="LinkedIn">
+" className="social-link" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                 <AiFillLinkedin />
               </a>
 

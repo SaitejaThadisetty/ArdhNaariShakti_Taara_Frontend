@@ -3,7 +3,7 @@ import "./login.css";
 import back from "../../assets/images/my-account.jpg";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
@@ -110,7 +110,7 @@ export const Regsiter = () => {
 
           {error && <span style={{ color: "red" }}>Something went wrong</span>}
         </div>
-        <ToastContainer />
+        
       </section>
     </>
   );
