@@ -33,15 +33,18 @@ header {
 
 .nav-menu ul {
   display: flex;
-  gap: 20px;
+  width: 100%;
 }
+
 
 .nav-link {
   text-transform: capitalize;
   color: #000;
   position: relative;
-  padding: 5px;
+  padding: 10px;
+  margin: 20px;
   transition: all 0.3s ease;
+
 }
 
 .nav-link::after {
@@ -61,7 +64,7 @@ header {
 
 .nav-link.active {
   font-weight: bold;
-  border-bottom: 2px solid #000;
+  color: white;
 }
 
 /* Mobile menu icon */
@@ -225,7 +228,9 @@ header.active {
     position: absolute;
     top: 70px;
     right: 0;
-    background: #ffa9cb;
+    z-index: 1000;
+    background: transparent !important;
+    backdrop-filter: blur(50px);
     width: 100%;
     padding: 15px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -234,6 +239,7 @@ header.active {
 
   .nav-menu.active {
     display: block;
+    
   }
 
   /* Ensure nav-menu is hidden when profile drawer is active */
@@ -244,8 +250,10 @@ header.active {
 
   .nav-menu ul {
     flex-direction: column;
-    gap: 10px;
+    gap: 0;
     text-align: center;
+    margin-top: 40px;
+    
   }
 
   .desktop-account {
@@ -255,7 +263,7 @@ header.active {
   .mobile-account {
     display: block !important;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 30px !important;
     position: relative;
     width: 100%; /* Ensure mobile account takes full width */
   }
@@ -272,11 +280,25 @@ header.active {
     right: 50%; 
     transform: translateX(50%); 
   }
+  .sli{
+    width: 100%;
+    border-bottom: 1px solid #000;
+    border-right: 5px solid #000;
+    border-radius: 8px;
+    text-align: left;
+    font-size: large;
+    padding: 16px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    color: #fff !important;
+    }
 }
+
 
 .profile {
   position: relative; 
   display: inline-block;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+
 }
 
 .profile .img img {
@@ -379,7 +401,7 @@ header.active {
   .mobile-account {
     margin-top: 10px;
     margin-bottom: 20px;
-  }
+  }  
 }
 
 .closeProfileMenu {
