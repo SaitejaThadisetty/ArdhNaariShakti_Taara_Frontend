@@ -61,15 +61,13 @@
   padding: 18px 22px;
   text-align: left;
   border-bottom: 1px solid #f1f3f4;
-  position: relative;
-  vertical-align: middle; /* Ensures vertical centering */
+  vertical-align: middle;
 }
 
 .shelter-table td {
   font-size: 15px;
   line-height: 1.6;
   color: #2d3748;
-  vertical-align: middle; /* Vertically center all table cells */
 }
 
 .shelter-table td.contact-number,
@@ -80,7 +78,6 @@
 .shelter-table td:nth-child(6),
 .shelter-table td.contact-number {
   text-align: center;
-  vertical-align: middle;
 }
 
 .shelter-table th {
@@ -95,7 +92,6 @@
   z-index: 10;
   padding: 16px 20px;
   border-bottom: 1px solid #f1f3f4;
-  /* Remove extra box-shadow, border, opacity, and text-shadow for a cleaner look */
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -128,13 +124,6 @@
   transform: scale(1.012);
   box-shadow: 0 8px 32px rgba(102, 126, 234, 0.13),
     0 2px 12px rgba(76, 175, 80, 0.09);
-}
-
-.shelter-table td {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #2d3748;
-  vertical-align: middle; /* Vertically center all table cells */
 }
 
 .shelter-table td:first-child {
@@ -195,11 +184,6 @@
   letter-spacing: 0.5px;
 }
 
-/* Center the contact number cell */
-.shelter-table td:nth-child(6) {
-  text-align: center;
-}
-
 .email-link {
   color: #667eea !important;
   text-decoration: none !important;
@@ -244,46 +228,51 @@
   font-size: 13px;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 900px) {
-  .shelter-header h1 {
-    font-size: 2.2rem;
-  }
-
-  .table-container {
-    padding: 18px 6px;
-  }
-
-  .shelter-table th,
-  .shelter-table td {
-    padding: 12px 8px;
-    font-size: 13px;
-  }
-
-  .map-link {
-    padding: 7px 12px;
-    font-size: 12px;
-  }
+.search-filter-bar {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-@media screen and (max-width: 600px) {
-  .shelter-header h1 {
-    font-size: 1.6rem;
-  }
+/* Wrap input with icon */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
-  .table-container {
-    padding: 10px 2px;
-    margin: 0 2px;
-  }
+.search-input-wrapper .search-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 16px;
+  color: #4a5568;
+  pointer-events: none;
+}
 
-  .shelter-table th,
-  .shelter-table td {
-    padding: 8px 4px;
-    font-size: 11px;
-  }
+.search-input {
+  padding: 8px 12px;
+  padding-left: 36px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #2d3748;
+  background: white;
+  width: 250px;
+}
 
-  .map-link {
-    padding: 5px 8px;
-    font-size: 10px;
-  }
+.search-input::placeholder {
+  color: #4a5568;
+  opacity: 1;
+}
+
+.filter-dropdown {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #2d3748;
+  background: white;
 }
