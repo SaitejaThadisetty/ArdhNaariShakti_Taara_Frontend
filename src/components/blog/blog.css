@@ -2,6 +2,11 @@
   margin-top: 50px;
   padding: 0 20px;
 }
+.blog .container.grid3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+}
 .blog .boxItems {
   background: #fff;
   border-radius: 20px;
@@ -102,8 +107,8 @@
 }
 .blog .date label {
   display: block;
-  margin-right: 15px;
-  font-size: 13px;
+  margin-right: 10px; /* Adjusted margin */
+  font-size: 14px; /* Slightly larger for readability */
   color: #74b9ff;
   font-weight: 500;
 }
@@ -112,6 +117,10 @@
 @media screen and (max-width: 768px) {
   .blog {
     padding: 0 10px;
+  }
+  .blog .container.grid3 {
+    grid-template-columns: 1fr; /* Single column on small screens */
+    grid-gap: 20px;
   }
   .blog .boxItems {
     margin-bottom: 20px;
@@ -126,7 +135,14 @@
     font-size: 18px;
   }
   .blog p {
-    font-size: 14px;
+    font-size: 15px; /* Slightly larger for readability */
+    line-height: 1.5; /* Improved line height */
+  }
+  .blog .date label {
+    font-size: 13px; /* Smaller date labels on mobile */
+  }
+  .blog .icon {
+    font-size: 16px; /* Smaller icons on mobile */
   }
 }
 
@@ -138,12 +154,19 @@
     height: 200px;
   }
   .blog h3 {
-    font-size: 16px;
+    font-size: 17px;
+  }
+  .blog p {
+    font-size: 14px;
+    line-height: 1.5; /* Consistent line height */
   }
   .blog .date {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+  .blog .date label {
+    margin-right: 5px; /* Further adjusted margin for very small screens */
   }
   .blog .tag a {
     font-size: 11px;
@@ -177,14 +200,14 @@
   display: flex;
   justify-content: center;
   margin: 20px 0 30px;
-  padding: 0 10px;
+  padding: 0 20px; /* Increased padding for consistency */
   position: relative;
 }
 
 .search-filter-wrapper {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 450px; /* Increased max-width for better desktop appearance */
 }
 
 .search-filter-wrapper .search-icon {
@@ -219,14 +242,35 @@
 }
 
 /* Mobile responsiveness for search input */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
+  .add-post-container {
+    margin: 15px 0;
+  }
+  .add-post-button {
+    padding: 8px 15px;
+    font-size: 15px;
+  }
   .search-filter-container {
-    padding: 0 20px;
+    padding: 0 15px;
     margin: 15px 0 25px;
   }
   .search-filter-wrapper input {
-    max-width: 100%;  /* full width on small screens */
-    font-size: 16px;  /* bigger font */
-    padding: 12px 18px 12px 44px; /* consistent padding with icon */
+    max-width: 100%;
+    font-size: 16px;
+    padding: 12px 18px 12px 44px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .search-filter-container {
+    padding: 0 10px;
+  }
+  .search-filter-wrapper input {
+    font-size: 14px;
+    padding: 10px 15px 10px 40px;
+  }
+  .search-filter-wrapper .search-icon {
+    font-size: 16px;
+    left: 12px;
   }
 }
