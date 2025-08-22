@@ -76,15 +76,21 @@ export const Card = ({ posts }) => {
                       : "No description available."}
                   </p>
                   <div className="date">
-                    <AiOutlineClockCircle className="icon" />
-                    <label>
-                      {item.createdAt
-                        ? new Date(item.createdAt).toDateString()
-                        : "Date not available"}
-                    </label>
-                    <AiOutlineComment className="icon" /> <label>27</label>
-                    <AiOutlineShareAlt className="icon" />{" "}
-                    <label>SHARE</label>
+                    <div>
+                      <AiOutlineClockCircle className="icon" />
+                      <label>
+                        {item.createdAt
+                          ? new Date(item.createdAt).toDateString()
+                          : "Date not available"}
+                      </label>
+                    </div>
+                    <div>
+                      <AiOutlineComment className="icon" /> <label>27</label>
+                    </div>
+                    <div>
+                      <AiOutlineShareAlt className="icon" />{" "}
+                      <label>SHARE</label>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -104,6 +104,7 @@
 .blog .date > div {
   display: flex;
   align-items: center;
+  gap: 5px; /* Added gap for spacing between icon and label */
 }
 .blog .date label {
   display: block;
@@ -119,7 +120,7 @@
     padding: 0 10px;
   }
   .blog .container.grid3 {
-    grid-template-columns: 1fr; /* Single column on small screens */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Allow two columns on wider mobile/tablet screens */
     grid-gap: 20px;
   }
   .blog .boxItems {
@@ -129,20 +130,34 @@
     padding: 20px;
   }
   .blog img {
-    height: 220px;
+    height: 250px; /* Increased height */
   }
   .blog h3 {
-    font-size: 18px;
+    font-size: 20px; /* Revert to original desktop size */
   }
   .blog p {
-    font-size: 15px; /* Slightly larger for readability */
-    line-height: 1.5; /* Improved line height */
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .blog .date {
+    flex-direction: column; /* Stack date, comment, share vertically */
+    align-items: flex-start;
+    gap: 10px; /* Increased gap between stacked items */
+  }
+  .blog .date > div {
+    width: 100%; /* Each item takes full width */
+    justify-content: flex-start; /* Align contents to start */
+    display: flex; /* Ensure inner div is also a flex container */
+    align-items: center;
+    gap: 5px; /* Ensure consistency for mobile */
   }
   .blog .date label {
-    font-size: 13px; /* Smaller date labels on mobile */
+    font-size: 13px;
+    margin-right: 10px; /* Adjusted margin */
   }
   .blog .icon {
-    font-size: 16px; /* Smaller icons on mobile */
+    font-size: 16px;
+    margin-right: 5px;
   }
 }
 
@@ -151,22 +166,34 @@
     padding: 15px;
   }
   .blog img {
-    height: 200px;
+    height: 220px; /* Adjusted height for smaller screens */
   }
   .blog h3 {
-    font-size: 17px;
+    font-size: 18px;
   }
   .blog p {
     font-size: 14px;
-    line-height: 1.5; /* Consistent line height */
+    line-height: 1.5;
   }
   .blog .date {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
+  .blog .date > div {
+    width: 100%;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Ensure consistency for mobile */
+  }
   .blog .date label {
-    margin-right: 5px; /* Further adjusted margin for very small screens */
+    font-size: 13px;
+    margin-right: 5px;
+  }
+  .blog .icon {
+    font-size: 16px;
+    margin-right: 5px;
   }
   .blog .tag a {
     font-size: 11px;
