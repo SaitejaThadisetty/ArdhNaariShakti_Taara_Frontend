@@ -112,3 +112,48 @@
 .show-more:hover {
   color: #0000cc;
 }
+
+@media (max-width: 1024px) {
+  .calming-container {
+    padding: 2rem 3rem;
+  }
+
+  .track-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .category-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .calming-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem; /* Smaller font size for main title */
+  }
+
+  .subheading {
+    font-size: 0.9rem;
+  }
+
+  .search-container {
+    max-width: 90%; /* Allow search bar to take more width */
+  }
+
+  .track-grid {
+    grid-template-columns: 1fr; /* Stack audio cards on mobile */
+    gap: 1.5rem;
+  }
+
+  .track-item {
+    padding: 0.8rem;
+  }
+
+  .category-title {
+    font-size: 1.2rem;
+  }
+}
