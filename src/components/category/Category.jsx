@@ -37,8 +37,13 @@ export const Category = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 2,
+     autoplay: true,
+  autoplaySpeed: 2100,
+  pauseOnHover: true,
+
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    arrows: false,
     responsive: [
       {
         breakpoint: 800,

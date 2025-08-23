@@ -1,52 +1,118 @@
 .accountInfo {
   margin: 80px 0;
 }
+
 .accountInfo .container {
   padding: 50px;
   max-width: 60%;
   margin: auto;
 }
+
 .accountInfo .content {
   margin-top: 80px;
   display: flex;
   justify-content: flex-start;
   position: relative;
 }
+
 .accountInfo .left {
   width: 150px;
   position: relative;
 }
+
 .accountInfo .right {
   width: calc(100% - 180px);
   margin-left: 50px;
 }
 
+
 .accountInfo .left .img input {
   width: 150px;
   height: 150px;
-  position: relative;
-  z-index: 2;
-  opacity: 0;
-}
-.accountInfo .icon,
-.accountInfo .img img {
   position: absolute;
   top: 0;
   left: 0;
-  width: 150px;
-  height: 150px;
-  z-index: 1;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.accountInfo .img {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.accountInfo .img img {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  display: block;
 }
+
+
+.accountInfo .icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+
 .accountInfo .right label {
   font-size: 17px;
   color: #000;
   margin-bottom: 10px;
   display: block;
 }
+
 .profile h4 {
   text-transform: capitalize;
   color: #000;
   font-weight: 500;
+}
+
+@media only screen and (max-width: 768px) {
+  .accountInfo .container {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .accountInfo .content {
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: center; /* Center items for mobile */
+  }
+
+  .accountInfo .left {
+    width: 100%; /* Take full width */
+    display: flex; /* Use flex to center the image */
+    justify-content: center;
+    margin-bottom: 20px; /* Add some space below the image */
+  }
+
+  .accountInfo .right {
+    width: 100%; /* Take full width */
+    margin-left: 0;
+    text-align: center; /* Center text for mobile */
+  }
+
+  .accountInfo .right label {
+    text-align: left; /* Keep labels left-aligned */
+  }
+
+  .accountInfo .right input {
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+  }
+
+  .accountInfo .right .button {
+    width: 100%;
+  }
 }

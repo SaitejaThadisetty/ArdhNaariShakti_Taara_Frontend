@@ -1,50 +1,95 @@
 .newPost {
   margin-top: 50px;
+  display: flex;
+  justify-content: center;
 }
+
 .newPost .container {
-  max-width: 50%;
-}
-.newPost i {
-  font-size: 25px;
-  margin-right: 20px;
-  margin-top: -20px;
-}
-.newPost img {
+  max-width: 900px;
   width: 100%;
-  height: 300px;
-  object-fit: cover;
 }
-.newPost .img {
-  position: relative;
+
+.newPost .content-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
+
+.newPost h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin: 0;
+}
+
 .newPost form {
   width: 100%;
-  margin: 0;
-  padding: 0;
-  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.file-actions button{
+   padding: 6px 12px;
+  background: #0077ff;
+  color: white;
   border: none;
-}
-.newPost .inputfile input {
-  width: 100%;
-  height: 300px;
-  position: relative;
-  z-index: 2;
-  opacity: 0;
-}
-.newPost .inputfile label {
-  font-size: 30px;
-  color: #000;
-  margin-left: 0;
-  width: 100%;
-  display: block;
-  cursor: pointer;
-}
-.newPost .img img {
-  /*position: absolute;
-  top: 0;
-  left: 0;*/
-  width: 100%;
-  height: 300px;
-  z-index: 1;
   border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  align-self: center;
 }
+
+.newPost input[type="text"] {
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.newPost .tox-tinymce {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.newPost .button {
+  padding: 12px 20px;
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  align-self: center;
+}
+
+.newPost .button:hover {
+  background: #005fcc;
+}
+
+.preview-box {
+  margin-top: 15px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  text-align: center;
+  max-width: 400px; /* adjust as per form width */
+}
+
+.preview-box img {
+  max-width: 100%;
+  max-height: 250px; /* prevents it from getting too tall */
+  border-radius: 5px;
+  object-fit: contain;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+}
+

@@ -2,6 +2,11 @@
   margin-top: 50px;
   padding: 0 20px;
 }
+.blog .container.grid3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+}
 .blog .boxItems {
   background: #fff;
   border-radius: 20px;
@@ -99,11 +104,12 @@
 .blog .date > div {
   display: flex;
   align-items: center;
+  gap: 5px; /* Added gap for spacing between icon and label */
 }
 .blog .date label {
   display: block;
-  margin-right: 15px;
-  font-size: 13px;
+  margin-right: 10px; /* Adjusted margin */
+  font-size: 14px; /* Slightly larger for readability */
   color: #74b9ff;
   font-weight: 500;
 }
@@ -113,6 +119,10 @@
   .blog {
     padding: 0 10px;
   }
+  .blog .container.grid3 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Allow two columns on wider mobile/tablet screens */
+    grid-gap: 20px;
+  }
   .blog .boxItems {
     margin-bottom: 20px;
   }
@@ -120,13 +130,34 @@
     padding: 20px;
   }
   .blog img {
-    height: 220px;
+    height: 250px; /* Increased height */
   }
   .blog h3 {
-    font-size: 18px;
+    font-size: 20px; /* Revert to original desktop size */
   }
   .blog p {
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .blog .date {
+    flex-direction: column; /* Stack date, comment, share vertically */
+    align-items: flex-start;
+    gap: 10px; /* Increased gap between stacked items */
+  }
+  .blog .date > div {
+    width: 100%; /* Each item takes full width */
+    justify-content: flex-start; /* Align contents to start */
+    display: flex; /* Ensure inner div is also a flex container */
+    align-items: center;
+    gap: 5px; /* Ensure consistency for mobile */
+  }
+  .blog .date label {
+    font-size: 13px;
+    margin-right: 10px; /* Adjusted margin */
+  }
+  .blog .icon {
+    font-size: 16px;
+    margin-right: 5px;
   }
 }
 
@@ -135,15 +166,34 @@
     padding: 15px;
   }
   .blog img {
-    height: 200px;
+    height: 220px; /* Adjusted height for smaller screens */
   }
   .blog h3 {
-    font-size: 16px;
+    font-size: 18px;
+  }
+  .blog p {
+    font-size: 14px;
+    line-height: 1.5;
   }
   .blog .date {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+  .blog .date > div {
+    width: 100%;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Ensure consistency for mobile */
+  }
+  .blog .date label {
+    font-size: 13px;
+    margin-right: 5px;
+  }
+  .blog .icon {
+    font-size: 16px;
+    margin-right: 5px;
   }
   .blog .tag a {
     font-size: 11px;
@@ -151,11 +201,103 @@
   }
 }
 
-/* display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    flex-direction: column-reverse; */
-/* display: flex;
-    flex-wrap: wrap;
-    margin: 0;
-    flex-direction: column-reverse; */
+.add-post-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.add-post-button {
+  display: inline-block;
+  background-color: #06254c;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.add-post-button:hover {
+  background-color: #471886;
+}
+
+/* === Updated Blog Search Bar with Icon === */
+.search-filter-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 30px;
+  padding: 0 20px; /* Increased padding for consistency */
+  position: relative;
+}
+
+.search-filter-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 450px; /* Increased max-width for better desktop appearance */
+}
+
+.search-filter-wrapper .search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #6c5ce7;
+  pointer-events: none;
+}
+
+.search-filter-wrapper input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border-radius: 6px;
+  border: 1px solid #dfe6e9;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: white;
+  color: #2d3436;
+}
+
+.search-filter-wrapper input:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 6px rgba(108, 92, 231, 0.4);
+}
+
+.search-filter-wrapper input::placeholder {
+  color: #888;
+}
+
+/* Mobile responsiveness for search input */
+@media screen and (max-width: 768px) {
+  .add-post-container {
+    margin: 15px 0;
+  }
+  .add-post-button {
+    padding: 8px 15px;
+    font-size: 15px;
+  }
+  .search-filter-container {
+    padding: 0 15px;
+    margin: 15px 0 25px;
+  }
+  .search-filter-wrapper input {
+    max-width: 100%;
+    font-size: 16px;
+    padding: 12px 18px 12px 44px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .search-filter-container {
+    padding: 0 10px;
+  }
+  .search-filter-wrapper input {
+    font-size: 14px;
+    padding: 10px 15px 10px 40px;
+  }
+  .search-filter-wrapper .search-icon {
+    font-size: 16px;
+    left: 12px;
+  }
+}
