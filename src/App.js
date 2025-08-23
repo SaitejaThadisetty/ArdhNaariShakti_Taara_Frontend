@@ -25,6 +25,7 @@ import { GoToTopButton } from "./components/goToTopButton/goToTopButton.jsx";
 import Feedback from "./pages/feedback/Feedback.jsx";
 import CalmingCorner from "./pages/music/CalmingCorner.jsx"
 import ForgotPassword from './pages/login/ForgotPassword';
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop.jsx";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -34,6 +35,7 @@ const App = () => {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <Header />
         <GoogleTagManager />
         <Routes>          
