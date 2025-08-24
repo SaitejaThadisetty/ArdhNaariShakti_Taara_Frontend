@@ -1,190 +1,469 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback, useRef } from "react";
 import "./shelter.css";
+import {shelterData} from "./data/shelterData"
+
+const SearchAndFilterBar = React.memo(function SearchAndFilterBar({
+  filterBy,
+  setFilterBy,
+  searchTerm,
+  setSearchTerm,
+  filters,
+  onFilterChange,
+}) {
+
+  // Normalizes input (single spaces, no leading double-space) without stealing cursor
+  const handleFilterInput = (field, raw) => {
+    const value = raw.replace(/\s{2,}/g, ' ');
+    onFilterChange(field, value);
+  };
+
+  return (
+    <>
+      <div className="search-filter-bar">
+        <select
+          value={filterBy}
+          onChange={(e) => setFilterBy(e.target.value)}
+          className="filter-dropdown"
+          aria-label="Select primary field to search"
+          name="primaryFilter"
+        >
+          <option value="state">State</option>
+          <option value="city">City</option>
+          <option value="district">District</option>
+          <option value="shelterName">Shelter House</option>
+          <option value="address">Address</option>
+          <option value="contactPerson">Contact Person</option>
+        </select>
+
+        <div className="search-input-wrapper">
+          <span className="search-icon" aria-hidden="true">🔍</span>
+          <input
+            type="text"
+            name="mainSearch"
+            autoComplete="off"
+            placeholder={`Search by ${filterBy}`}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+            aria-label={`Search shelters by ${filterBy}`}
+          />
+        </div>
+      </div>
+
+      <div className="multi-filter-bar">
+        {/* State */}
+        <div className="filter-group">
+          <label htmlFor="filter-state">State</label>
+          <input
+            id="filter-state"
+            name="state"
+            autoComplete="off"
+            inputMode="text"
+            placeholder="e.g. Gujarat"
+            aria-label="Filter by state"
+            value={filters.state}
+            onChange={(e) => handleFilterInput('state', e.target.value)}
+          />
+        </div>
+        {/* City */}
+        <div className="filter-group">
+          <label htmlFor="filter-city">City</label>
+          <input
+            id="filter-city"
+            name="city"
+            autoComplete="off"
+            inputMode="text"
+            placeholder="e.g. Jaipur"
+            aria-label="Filter by city"
+            value={filters.city}
+            onChange={(e) => handleFilterInput('city', e.target.value)}
+          />
+        </div>
+        {/* District */}
+        <div className="filter-group">
+          <label htmlFor="filter-district">District</label>
+          <input
+            id="filter-district"
+            name="district"
+            autoComplete="off"
+            inputMode="text"
+            placeholder="e.g. Vadodara"
+            aria-label="Filter by district"
+            value={filters.district}
+            onChange={(e) => handleFilterInput('district', e.target.value)}
+          />
+        </div>
+        {/* Shelter Name */}
+        <div className="filter-group">
+          <label htmlFor="filter-shelterName">Shelter</label>
+          <input
+            id="filter-shelterName"
+            name="shelterName"
+            autoComplete="off"
+            inputMode="text"
+            placeholder="Shelter name"
+            aria-label="Filter by shelter name"
+            value={filters.shelterName}
+            onChange={(e) => handleFilterInput('shelterName', e.target.value)}
+          />
+        </div>
+      </div>
+    </>
+  );
+});
 
 export const Shelter = () => {
+  // Group related states together for better organization
+  // Search and filtering states
   const [searchTerm, setSearchTerm] = useState("");
   const [filterBy, setFilterBy] = useState("state");
-
-  const shelterData = [
-    {
-      id: 1,
-      shelterName: "Mitr Trust",
-      address:
-        "Mitr Trust Garima Greh B-51, B Block, SITA PURI, NEW DELHI-45 Landmark: Dabri police station",
-      contactPerson: "Ms Rudrani Chhetri",
-      phone: "9910899755",
-      email: "mitrcbodelhi@gmail.com",
-      state: "New Delhi",
-      district: "South West Delhi",
-      city: "Uttam Nagar",
-      pincode: "110045",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=28.555698400000008%2C77.1748359&z=8",
-    },
-    {
-      id: 2,
-      shelterName: "Sakha",
-      address:
-        "Sakha plot no-335/1080 Ebaranga, In front of Champati Petrol Pump Sundarpada,Bhubaneswar, Odisha pin-751002",
-      contactPerson: "Mr. Saroj Kumar Hota",
-      phone: "9437656639",
-      email: "sakha.odisha@gmail.com",
-      state: "Odisha",
-      district: "Khordha",
-      city: "Bhubaneswar",
-      pincode: "751002",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=20.226840099999997%2C85.81396219999998&z=8g",
-    },
-    {
-      id: 3,
-      shelterName: "Uttarayan",
-      address: "Uttarayan, Old 21, New 23, Gurudwara Road, Hyderabad, Telangana",
-      contactPerson: "Ms. Sneha",
-      phone: "9848555677",
-      email: "uttarayan@gmail.com",
-      state: "Telangana",
-      district: "Hyderabad",
-      city: "Hyderabad",
-      pincode: "500053",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=17.385044%2C78.486671&z=10",
-    },
-    {
-      id: 4,
-      shelterName: "Snehagram",
-      address:
-        "Hosur Road, Poonamallee, Chennai, Tamil Nadu Landmark: Opposite to Apollo hospital",
-      contactPerson: "Mr. Ramesh Kumar",
-      phone: "9840004321",
-      email: "snehagram.tn@gmail.com",
-      state: "Tamil Nadu",
-      district: "Chennai",
-      city: "Poonamallee",
-      pincode: "600056",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=13.0826802%2C80.2707184&z=12",
-    },
-    {
-      id: 5,
-      shelterName: "Aastha",
-      address:
-        "House No. 14, Sector 23, Gurgaon, Haryana Landmark: Near MG Road Metro Station",
-      contactPerson: "Ms. Anjali",
-      phone: "9810123456",
-      email: "aastha.hry@gmail.com",
-      state: "Haryana",
-      district: "Gurgaon",
-      city: "Gurgaon",
-      pincode: "122001",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=28.4594965%2C77.0266383&z=13",
-    },
-    {
-      id: 6,
-      shelterName: "Parivartan",
-      address:
-        "Street 5, Sector 11, Noida, Uttar Pradesh Landmark: Near Sector 11 Metro Station",
-      contactPerson: "Mr. Vikram Singh",
-      phone: "9876543210",
-      email: "parivartan.up@gmail.com",
-      state: "Uttar Pradesh",
-      district: "Noida",
-      city: "Noida",
-      pincode: "201301",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=28.5355161%2C77.3910265&z=13",
-    },
-    {
-      id: 7,
-      shelterName: "Sahara",
-      address:
-        "Block A, Sector 4, Chandigarh Landmark: Opposite Rose Garden",
-      contactPerson: "Ms. Meera",
-      phone: "9988776655",
-      email: "sahara.chd@gmail.com",
-      state: "Chandigarh",
-      district: "Chandigarh",
-      city: "Chandigarh",
-      pincode: "160017",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=30.7333148%2C76.7794179&z=13",
-    },
-    {
-      id: 8,
-      shelterName: "Nirmal Jyoti",
-      address:
-        "Sector 7, Panjim, Goa Landmark: Near Panjim Bus Stand",
-      contactPerson: "Mr. Ravi",
-      phone: "9765432109",
-      email: "nirmal.goa@gmail.com",
-      state: "Goa",
-      district: "North Goa",
-      city: "Panjim",
-      pincode: "403001",
-      mapLink:
-        "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=15.4909309%2C73.8278499&z=14",
-    },
-    {
-      id: 9,
-      shelterName: "Gokhale Road Bandhan",
-      address: "773 Purbalok Kalikapur Mukundapur, Kolkata",
-      contactPerson: "Ranjita Sinha (Project Director)",
-      phone: "9830027185",
-      email: "garimagreh.astana@yahoo.com",
-      state: "West Bengal",
-      district: "Kolkata",
-      city: "Kolkata",
-      pincode: "700099",
-      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=22.5009134%2C88.39493449999998&z=8"
-    },
-    {
-      id: 10,
-      shelterName: "Kolkata Rista",
-      address: "95/D77 Basundhara Chingrighata, Canal South Road, Lakshmimina Bhaban, Kolkata, West Bengal",
-      contactPerson: "Dr. Santosh Kr. Giri (Project Director)",
-      phone: "9339219696",
-      email: "ristashelterhome@gmail.com",
-      state: "West Bengal",
-      district: "Kolkata",
-      city: "Kolkata",
-      pincode: "700105",
-      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=22.557509900000003%2C88.40955129999998&z=8"
-    },
-    {
-      id: 11,
-      shelterName: "Lakshya Trust",
-      address: "302/303/304, Shilalekh Complex, Opp. To Ford Showroom, Munjmahuda, Vadodara, Gujarat – 390020",
-      contactPerson: "Mr. Sylvester Merchant (Project Director)",
-      phone: "9825311997",
-      email: "lakshyagarimagreh@gmail.com",
-      state: "Gujarat",
-      district: "Vadodara",
-      city: "Vadodara",
-      pincode: "390020",
-      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=22.28683749999999%2C73.1672918&z=8"
-    },
-    {
-      id: 12,
-      shelterName: "Nai Bhor Sansta",
-      address: "46, Marudhar Vihar, Khatipura Road, Jhotwara, Jaipur",
-      contactPerson: "Pushpa Maai (Project Director)",
-      phone: "9829291377",
-      email: "naibhor.sanstha@gmail.com",
-      state: "Rajasthan",
-      district: "Jaipur",
-      city: "Jaipur",
-      pincode: "", // Pincode not provided in the HTML snippet
-      mapLink: "https://www.google.com/maps/d/viewer?mid=1QYgxDpzNZeicuh1Ru2bZLN3DnRWc3Qc&ll=26.92346419999998%2C75.7478494&z=8"
-    }
-
-  ];
-
-  // Filter shelterData based on searchTerm and filterBy field
-  const filteredData = shelterData.filter((item) => {
-    const value = item[filterBy]?.toLowerCase() || "";
-    return value.includes(searchTerm.toLowerCase());
+  const [filters, setFilters] = useState({
+    state: "",
+    city: "",
+    district: "",
+    shelterName: ""
   });
+
+  // Table presentation states
+  const [sortField, setSortField] = useState(null);
+  const [sortDirection, setSortDirection] = useState('asc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [selectedShelter, setSelectedShelter] = useState(null);
+
+  const tableTopRef = useRef(null);
+
+  // Event handlers with useCallback for better performance
+  const handleFilterChange = useCallback((field, value) => {
+    setFilters(prev => {
+      if (prev[field] === value) return prev; // avoid unnecessary re-renders
+      return { ...prev, [field]: value };
+    });
+    setCurrentPage(1);
+  }, [setCurrentPage]);
+
+  const handleSort = useCallback((field) => {
+    setSortField(prevSortField => {
+      if (prevSortField === field) {
+        setSortDirection(prevDirection => prevDirection === 'asc' ? 'desc' : 'asc');
+        return field;
+      }
+      setSortDirection('asc');
+      return field;
+    });
+  }, []);
+
+  // Filter data with proper memoization
+  const filteredData = useMemo(() => {
+    return shelterData.filter((item) => {
+      // First apply main search filter
+      const filterValue = item[filterBy]?.toString().toLowerCase() || "";
+      if (searchTerm && !filterValue.includes(searchTerm.toLowerCase())) {
+        return false;
+      }
+
+      // Then apply multi-filters
+      return Object.entries(filters).every(([key, value]) => {
+        if (!value) return true; // Skip empty filters
+        const itemValue = (item[key] || "").toString().toLowerCase();
+        return itemValue.includes(value.toLowerCase());
+      });
+    });
+  }, [shelterData, filterBy, searchTerm, filters]);
+
+  // Sort the filtered data with proper handling of null/undefined values
+  const sortedData = useMemo(() => {
+    if (!sortField) return filteredData;
+
+    return [...filteredData].sort((a, b) => {
+      const aValue = (a[sortField] ?? "").toString().toLowerCase();
+      const bValue = (b[sortField] ?? "").toString().toLowerCase();
+
+      return sortDirection === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue);
+    });
+  }, [filteredData, sortField, sortDirection]);
+
+  // Calculate pagination with safeguards for empty data
+  const totalItems = sortedData.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
+  // Ensure currentPage is within valid range
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), Math.max(1, totalPages));
+
+  if (safeCurrentPage !== currentPage) {
+    setCurrentPage(safeCurrentPage);
+  }
+
+  const indexOfLastItem = safeCurrentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = sortedData.slice(indexOfFirstItem, indexOfLastItem);
+
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+  const handlePageChange = useCallback((newPage) => {
+    setCurrentPage(newPage);
+    // scroll right after state request
+    setTimeout(scrollToTop, 0);
+  }, [scrollToTop]);
+
+  const handleItemsPerPageChange = useCallback((value) => {
+    setItemsPerPage(value);
+    setCurrentPage(1);
+    setTimeout(scrollToTop, 0);
+  }, [scrollToTop]);
+
+  // Component for the pagination controls
+  const PaginationControls = () => (
+    <div className="pagination-controls">
+      <button
+        onClick={() => handlePageChange(safeCurrentPage - 1)}
+        disabled={safeCurrentPage === 1}
+        className="pagination-button"
+        aria-label="Previous page"
+      >
+        <span aria-hidden="true">←</span> Previous
+      </button>
+
+      <div className="pagination-info">
+        <span className="page-info">
+          Page {safeCurrentPage} of {totalPages}
+        </span>
+        <span className="results-info">
+          ({totalItems} {totalItems === 1 ? 'result' : 'results'})
+        </span>
+      </div>
+
+      <button
+        onClick={() => handlePageChange(safeCurrentPage + 1)}
+        disabled={safeCurrentPage === totalPages || totalPages === 0}
+        className="pagination-button"
+        aria-label="Next page"
+      >
+        Next <span aria-hidden="true">→</span>
+      </button>
+
+      <div className="items-per-page-container">
+        <label htmlFor="items-per-page">Show:</label>
+        <select
+          id="items-per-page"
+          value={itemsPerPage}
+          onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
+          className="items-per-page"
+          aria-label="Items per page"
+        >
+          <option value={5} style={{ color: "black" }}>5</option>
+          <option value={10} style={{ color: "black" }} >10</option>
+          <option value={20} style={{ color: "black" }}>20</option>
+          <option value={50} style={{ color: "black" }}>50</option>
+        </select>
+      </div>
+    </div>
+  );
+
+  // Shelter card component for mobile view
+  const ShelterCard = ({ shelter }) => {
+    const handleCardClick = () => setSelectedShelter(shelter);
+
+    return (
+      <div
+        className="shelter-card"
+        onClick={handleCardClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === 'Enter' && handleCardClick()}
+        aria-label={`View details for ${shelter.shelterName}`}
+      >
+        <h3 className="card-title">{shelter.shelterName}</h3>
+        <div className="card-content">
+          <p>
+            <strong>Location:</strong>
+            <span>
+              {shelter.city}
+              {shelter.city && shelter.state ? ', ' : ''}
+              {shelter.state}
+            </span>
+          </p>
+          <p>
+            <strong>Contact:</strong>
+            <span>{shelter.contactPerson}</span>
+          </p>
+          <p>
+            <strong>Phone:</strong>
+            <a href={`tel:${shelter.phone}`} className="card-phone" onClick={(e) => e.stopPropagation()}>
+              {shelter.phone}
+            </a>
+          </p>
+        </div>
+        <div className="card-actions">
+          <a
+            href={`mailto:${shelter.email}`}
+            className="card-button email-button"
+            onClick={(e) => e.stopPropagation()}
+            aria-label={`Email ${shelter.shelterName}`}
+          >
+            <span aria-hidden="true">✉</span> Email
+          </a>
+          <a
+            href={shelter.mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-button map-button"
+            onClick={(e) => e.stopPropagation()}
+            aria-label={`View map for ${shelter.shelterName}`}
+          >
+            <span aria-hidden="true">🗺️</span> Map
+          </a>
+        </div>
+      </div>
+    );
+  };
+
+  // Modal component for shelter details
+  const ShelterModal = ({ shelter, onClose }) => {
+    if (!shelter) return null;
+
+    const modalRef = React.useRef(null);
+
+    React.useEffect(() => {
+      // Focus the modal when it opens
+      if (modalRef.current) {
+        modalRef.current.focus();
+
+        // Scroll the modal into view if needed
+        // This ensures the modal is visible regardless of where it was triggered
+        window.scrollTo({
+          top: window.pageYOffset - 50, // Slight offset from current position
+          behavior: "smooth"
+        });
+
+        // Alternative approach: center the modal in viewport
+        const viewportHeight = window.innerHeight;
+        const modalHeight = modalRef.current.offsetHeight;
+
+        if (modalHeight > viewportHeight * 0.8) {
+          window.scrollTo({
+            top: window.pageYOffset - 100,
+            behavior: "smooth"
+          });
+        } else {
+          // Center the modal in the current viewport
+          const rect = modalRef.current.getBoundingClientRect();
+          const modalTop = rect.top;
+          const modalCenter = modalTop + (modalHeight / 2);
+          const viewportCenter = viewportHeight / 2;
+          const scrollAdjustment = modalCenter - viewportCenter;
+
+          if (Math.abs(scrollAdjustment) > 50) { // Only adjust if significantly off-center
+            window.scrollTo({
+              top: window.pageYOffset + scrollAdjustment,
+              behavior: "smooth"
+            });
+          }
+        }
+      }
+
+      // Prevent body scrolling when modal is open
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.body.style.overflow = 'visible';
+      };
+    }, []);
+
+    // Close on escape key
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    return (
+      <div
+        className="modal-overlay"
+        onClick={onClose}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        <div
+          className="modal-content"
+          onClick={(e) => e.stopPropagation()}
+          ref={modalRef}
+          tabIndex="-1"
+          onKeyDown={handleKeyDown}
+        >
+          <button
+            className="close-modal"
+            onClick={onClose}
+            aria-label="Close details"
+          >
+            ×
+          </button>
+          <h2 id="modal-title">{shelter.shelterName}</h2>
+          <div className="shelter-details">
+            <div className="detail-row">
+              <strong>Address:</strong>
+              <span>{shelter.address}</span>
+            </div>
+            <div className="detail-row">
+              <strong>Contact Person:</strong>
+              <span>{shelter.contactPerson}</span>
+            </div>
+            <div className="detail-row">
+              <strong>Phone:</strong>
+              <span className="detail-phone">{shelter.phone}</span>
+            </div>
+            <div className="detail-row">
+              <strong>Email:</strong>
+              <a href={`mailto:${shelter.email}`} className="detail-link">
+                {shelter.email}
+              </a>
+            </div>
+            <div className="detail-row">
+              <strong>Location:</strong>
+              <span>{shelter.city}, {shelter.district}, {shelter.state} {shelter.pincode}</span>
+            </div>
+            <a
+              href={shelter.mapLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="view-map-btn"
+            >
+              <span aria-hidden="true">🗺️</span> View on Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  // Table header component with sort indicators
+  const TableHeader = ({ field, children }) => (
+    <th
+      onClick={(e) => {
+        if (field) {
+          e.stopPropagation(); // Prevent row click event
+          handleSort(field);
+        }
+      }}
+      className={field ? 'sortable' : ''}
+      aria-sort={field && sortField === field ? sortDirection : undefined}
+    >
+      {children}
+      {field && sortField === field && (
+        <span className="sort-indicator" aria-hidden="true">
+          {sortDirection === 'asc' ? ' ↑' : ' ↓'}
+        </span>
+      )}
+    </th>
+  );
+
+  const activeFilterEntries = Object.entries(filters).filter(([, v]) => v?.trim());
+  const clearSingleFilter = (key) =>
+    setFilters((prev) => ({ ...prev, [key]: "" }));
+  const clearAllFilters = () =>
+    setFilters({ state: "", city: "", district: "", shelterName: "" });
 
   return (
     <div className="shelter-page">
@@ -196,89 +475,131 @@ export const Shelter = () => {
         </p>
       </div>
 
-      {/* Search and filter controls */}
-      <div className="search-filter-bar">
-        <select
-          value={filterBy}
-          onChange={(e) => setFilterBy(e.target.value)}
-          className="filter-dropdown"
-        >
-          <option value="state">State</option>
-          <option value="city">City</option>
-          <option value="district">District</option>
-          <option value="shelterName">Shelter House</option>
-          <option value="address">Address</option>
-          <option value="contactPerson">Contact Person</option>
-        </select>
-
-        {/* Search Input with Icon */}
-        <div className="search-input-wrapper">
-          <span className="search-icon">🔍</span>
-          <input
-            type="text"
-            placeholder={`Search by ${filterBy}`}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
-        </div>
+      <div className="filters-help">
+        {activeFilterEntries.length > 0 && (
+          <div className="active-filters" aria-label="Active filters">
+            {activeFilterEntries.map(([k, v]) => (
+              <span key={k} className="filter-chip">
+                <span className="filter-chip__label">{k}:</span>
+                <span className="filter-chip__value" title={v}>{v}</span>
+                <button
+                  type="button"
+                  className="filter-chip__close"
+                  aria-label={`Remove ${k} filter`}
+                  onClick={() => clearSingleFilter(k)}
+                >
+                  ×
+                </button>
+              </span>
+            ))}
+            <button
+              type="button"
+              className="clear-filters-btn"
+              onClick={clearAllFilters}
+              aria-label="Clear all filters"
+            >
+              Clear all
+            </button>
+          </div>
+        )}
       </div>
 
-      <div className="table-container">
-        <table className="shelter-table">
+      {/* Search and filter controls */}
+      <SearchAndFilterBar
+        filterBy={filterBy}
+        setFilterBy={setFilterBy}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        filters={filters}
+        onFilterChange={handleFilterChange}
+      />
+
+      {/* Results count display */}
+      <div className="results-summary">
+        <p>Showing {currentItems.length} of {totalItems} shelters</p>
+      </div>
+
+      {/* Mobile view - Card layout */}
+      <div className="shelter-cards-container">
+        {currentItems.length > 0 ? (
+          currentItems.map((item) => (
+            <ShelterCard key={item.id} shelter={item} />
+          ))
+        ) : (
+          <div className="no-results">
+            No shelters found matching your criteria.
+          </div>
+        )}
+      </div>
+
+      {/* Desktop view - Table layout */}
+      <div className="table-container" ref={tableTopRef}>
+        <table className="shelter-table" aria-label="Shelter houses directory">
           <thead>
             <tr>
-              <th>S.no</th>
-              <th>Location</th>
-              <th>Shelter House</th>
-              <th>Address</th>
-              <th>Contact Person</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>State</th>
-              <th>District</th>
-              <th>City</th>
-              <th>Pincode</th>
+              <TableHeader>S.no</TableHeader>
+              <TableHeader>Location</TableHeader>
+              <TableHeader field="shelterName">Shelter House</TableHeader>
+              <TableHeader field="address">Address</TableHeader>
+              <TableHeader field="contactPerson">Contact Person</TableHeader>
+              <TableHeader>Phone</TableHeader>
+              <TableHeader>Email</TableHeader>
+              <TableHeader field="state">State</TableHeader>
+              <TableHeader field="district">District</TableHeader>
+              <TableHeader field="city">City</TableHeader>
+              <TableHeader field="pincode">Pincode</TableHeader>
             </tr>
           </thead>
           <tbody>
-            {filteredData.map((item, index) => (
-              <tr key={item.id}>
-                <td>{index + 1}</td>
-                <td>
-                  <a
-                    href={item.mapLink}
-                    className="map-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Map
-                  </a>
-                </td>
-                <td className="shelter-name">{item.shelterName}</td>
-                <td>{item.address}</td>
-                <td className="contact-person">
-                  {item.contactPerson}
-                  <br />
-                  <small>Project Director</small>
-                </td>
-                <td className="contact-number" style={{ textAlign: "center" }}>
-                  {item.phone}
-                </td>
-                <td>
-                  <a href={`mailto:${item.email}`} className="email-link">
-                    {item.email}
-                  </a>
-                </td>
-                <td>{item.state}</td>
-                <td>{item.district}</td>
-                <td>{item.city}</td>
-                <td>{item.pincode}</td>
-              </tr>
-            ))}
-            {filteredData.length === 0 && (
+            {currentItems.length > 0 ? (
+              currentItems.map((item, index) => (
+                <tr
+                  key={item.id}
+                  onClick={() => setSelectedShelter(item)}
+                  className="clickable-row"
+                >
+                  <td>{indexOfFirstItem + index + 1}</td>
+                  <td>
+                    <a
+                      href={item.mapLink}
+                      className="map-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      aria-label={`View map for ${item.shelterName}`}
+                    >
+                      View Map
+                    </a>
+                  </td>
+                  <td className="shelter-name">{item.shelterName}</td>
+                  <td>{item.address}</td>
+                  <td className="contact-person">
+                    {item.contactPerson}
+                    <br />
+                    <small>Project Director</small>
+                  </td>
+                  <td className="contact-number">
+                    <a href={`tel:${item.phone}`}>{item.phone}</a>
+                  </td>
+                  <td>
+                    <a
+                      href={`mailto:${item.email}`}
+                      className="email-link"
+                      onClick={(e) => e.stopPropagation()}
+                      aria-label={`Email ${item.shelterName}`}
+                    >
+                      {item.email}
+                    </a>
+                  </td>
+                  <td>{item.state}</td>
+                  <td>{item.district}</td>
+                  <td>{item.city}</td>
+                  <td>{item.pincode}</td>
+                </tr>
+              ))
+            ) : (
               <tr>
-                <td colSpan="11" style={{ textAlign: "center" }}>
+                <td colSpan="10" className="no-results-cell">
                   No shelters found matching your criteria.
                 </td>
               </tr>
@@ -286,6 +607,17 @@ export const Shelter = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Pagination controls */}
+      <PaginationControls />
+
+      {/* Detail view modal */}
+      {selectedShelter && (
+        <ShelterModal
+          shelter={selectedShelter}
+          onClose={() => setSelectedShelter(null)}
+        />
+      )}
     </div>
   );
 };
