@@ -87,10 +87,10 @@ export const Header = () => {
         
         {/* Logo + Title */}
         <div className="logo-title">
-          <Link to="/" onClick={closeMenu}>
+          <Link to="/" onClick={closeMenu} className="flex">
             <img src={logo} alt="logo" width="80px" />
+            <h1 className="project-title">ArdhNaariShakti Taara</h1>
           </Link>
-          <h1 className="project-title">ArdhNaariShakti Taara</h1>
         </div>
 
         {/* Hamburger Icon */}
